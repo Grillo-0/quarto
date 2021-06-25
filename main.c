@@ -1,14 +1,32 @@
 #include <stdio.h>
 
-void inicializarPinos(int pinos[]);
 void inicializarTabuleiro(int tabuleiro[]);
+int *verificar(int *tabuleiro);
 
 int main(int argc, char *argv[]){
-int pinos[16];
-int tabuleiro[16];
+	int tabuleiro[16];
+	inicializarTabuleiro(tabuleiro);
+	int jogadas = 0;
+	do{
+		int peca;
+		int posicao;
+		scanf("%X %X",&peca, &posicao);
+		tabuleiro[posicao] = peca;
 
-inicializarPinos(pinos);
-inicializarTabuleiro(tabuleiro);
+		int *sequencia = verificar(tabuleiro);
+		int ganhou = 0;
+		if(*sequencia > 0){
+			ganhou = 1;
+		}
+		jogadas++;
+	}
+	while(!ganhou && jogadas < 16);
+
+	if(ganhou){
+		printarTabuleiro(tabuleiro);
+		printf("%d",!(jogadas % 2) + 1);
+		printarSequencia(sequencia);
+	}
 }
 //teste
 //ehescura ehbaixa ehquadrada  ehoca
