@@ -1,28 +1,30 @@
 #include <stdio.h>
 
-int verificarDiagoPri();
-int verificarDiagoSec();
-int verificarDiagoPri();
-int verificarColunas();
-void venceu(int carac, int tipo, int pos);
-int verificarLinhas();
-int verficaTabuleiro();
 void inicializarTabuleiro();
+void verficaTabuleiro();
+void verificarLinhas();
+void verificarColunas();
+void verificarDiagoPri();
+void verificarDiagoSec();
+void venceu(int carac, int tipoCar, int tipo, int pos);
 void printarTabuleiro();
+void printarCarac(int carac, int tipoCar);
 
 
 int tabuleiro[16];
 int flag = 0;
+int jogadas = 0;
 
 int main(int argc, char *argv[]){
 	inicializarTabuleiro();
-	while(flag){
+	while(!flag){
 		int peca;
 		int posicao;
-		scanf("%X %X",&peca, &posicao);
+		scanf("%X\n%X",&peca, &posicao);
 
 		tabuleiro[posicao] = peca;
 		verficaTabuleiro();
+		jogadas++;
 	}
 }
 
@@ -31,21 +33,24 @@ void inicializarTabuleiro(){
 	for(int i=0; i<16; i++){
 		tabuleiro[i]=-1;
 	}
+
 }
 
-int verficaTabuleiro(){
-	verificarDiagoSec();
-	verificarDiagoPri();
-	verificarColunas();
+void verficaTabuleiro(){
 	verificarLinhas();
+	verificarColunas();
+	verificarDiagoPri();
+	verificarDiagoSec();
 }
 
 
-int verificarLinhas(){
+void verificarLinhas(){
+	//printf("Linhas Verificadas\n");
 	int and;
 	int or;
 	int xor;
 	int xnor;
+	int tipoCar;
 	for(int i=0;i<4;i++){
 		and = -1;
 		or = 0x0;
@@ -55,25 +60,21 @@ int verificarLinhas(){
 		}
 		xor = and ^ or;
 		xnor = ~xor;
-		if(xnor>>4){
-			venceu(xnor, 0,i);
+		tipoCar = xnor & and;
+		if(xnor>>4 && xor){
+			venceu(xnor, tipoCar, 0,i);
 		}
 	}
 }
 
-void venceu(int carac, int tipo, int pos){
-	printarTabuleiro(tabuleiro);
-	printf("%d",!(jogadas % 2) + 1);
-	printarSequencia(tipo,pos);
-	printarCarac(carac);
-	flag = 1;
-}
 
-int verificarColunas(){
+void verificarColunas(){
+	//printf("Colunas Verificadas\n");
 	int and;
 	int or;
 	int xor;
 	int xnor;
+	int tipoCar;
 	for(int i=0;i<4;i++){
 		for(int j=0;j<4;j++){
 			and &= tabuleiro[i+j*4];
@@ -81,53 +82,57 @@ int verificarColunas(){
 		}
 		xor = and ^ or;
 		xnor= ~xor;
-		if(xnor>>4){
-			venceu(xnor, 1,i);
+		tipoCar = xnor & and;
+		if(xnor>>4 && xor){
+			venceu(xnor, tipoCar, 1,i);
 		}
 	}
-	return 0;
 }
 
-int verificarDiagoPri(){
+void verificarDiagoPri(){
+	//printf("Diagonal Principal Verificada\n");
 	int and;
 	int or;
 	int xor;
 	int xnor;
+	int tipoCar;
 	for(int i=0;i<4;i++){
 		and &= tabuleiro[i*5];
 		or |= tabuleiro[i*5];
 	}
 	xor = and ^ or;
 	xnor= ~xor;
-	if(xnor>>4){
-		venceu(xnor, 2,1);
+	tipoCar = xnor & and;
+	if(xnor>>4 && xor){
+		venceu(xnor, tipoCar, 2,1);
 	}
-	return 0;
 }
 
-int verificarDiagoSec(){
+void verificarDiagoSec(){
+	//printf("Diagonal Secundaria Verificada\n");
 	int and;
 	int or;
 	int xor;
 	int xnor;
+	int tipoCar;
 	for(int i=0;i<4;i++){
 		and &= tabuleiro[i*3];
 		or |= tabuleiro[i*3];
 	}
 	xor = and ^ or;
 	xnor= ~xor;
-	if(xnor>>4){
-		venceu(xnor, 2,2);
+	tipoCar = xnor & and;
+	if(xnor>>4 && xor){
+		venceu(xnor, tipoCar, 2,2);
 	}
-	return 0;
 }
 
 void printarTabuleiro(){
 	for(int i=0; i<4; i++){
 		for(int j=0; j<4; j++){
 			int peca = tabuleiro[i*4+j];
-			if(peca == -1){
-			printf("%X",peca);
+			if(peca != -1){
+				printf("%X",peca);
 			}
 			else{
 				printf("-");
@@ -140,14 +145,69 @@ void printarTabuleiro(){
 //ehescura ehbaixa ehquadrada  ehoca
 //   0        0        0         0
 
-void printarCarac(int carac){
+void venceu(int carac, int tipoCar, int tipo, int pos){
+	printarTabuleiro();
+	printf("%d\n",!(jogadas % 2) + 1);
+	//printarSequencia(tipo,pos);
+	printarCarac(carac, tipoCar);
+	flag = 1;
+}
+
+void printarCarac(int carac, int tipoCar){
 	int mask = 0b0001;
 	for(int i=0;i<4;i++){
 		int res = (mask<<i & carac)>>i;
+		int tipo = (mask<<i & tipoCar)>>i;
 		if(res){
-			if(i == 0){
-				printf("Oca")
+			if(tipo){
+				switch(i){
+					case 0:
+						printf("oca\n");
+						break;
+					case 1:
+						printf("quadrada\n");
+						break;
+					case 2:
+						printf("pequena\n");
+						break;
+					case 3:
+						printf("escura\n");
+						break;
+				}
+			}
+			else{
+				switch(i){
+					case 0:
+						printf("solida\n");
+						break;
+					case 1:
+						printf("circular\n");
+						break;
+					case 2:
+						printf("grande\n");
+						break;
+					case 3:
+						printf("branca\n");
+						break;
+				}
 			}
 		}
 	}
 }
+
+//void printarSequencia(int tipo ,int pos){
+	
+//}
+//0001	0100
+//0011	1110
+//0001	0110
+//1001	1100
+//
+//0001	0100
+//1011	1110
+//
+//1010	1010
+//
+//0101	0101
+//0001	0100
+
