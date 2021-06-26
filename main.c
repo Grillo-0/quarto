@@ -1,6 +1,13 @@
 #include <stdio.h>
 
-void inicializarTabuleiro(int tabuleiro[]);
+int verificarDiagoPri();
+int verificarDiagoSec();
+int verificarDiagoPri();
+int verificarColunas();
+void venceu(int carac, int tipo, int pos);
+int verificarLinhas();
+int verficaTabuleiro();
+void inicializarTabuleiro();
 void printarTabuleiro();
 
 
@@ -25,17 +32,6 @@ void inicializarTabuleiro(){
 		tabuleiro[i]=-1;
 	}
 }
-00000001
-00001011
-00001001
-11111111
-
-00000001
-11111111
-
-11111110
-
-00000001
 
 int verficaTabuleiro(){
 	verificarDiagoSec();
