@@ -9,7 +9,7 @@ void verificarDiagoSec();
 void venceu(int carac, int tipoCar, int tipo, int pos);
 void printarTabuleiro();
 void printarCarac(int carac, int tipoCar);
-
+void printarSequencia(int tipo ,int pos);
 
 int tabuleiro[16];
 int flag = 0;
@@ -67,6 +67,19 @@ void verificarLinhas(){
 	}
 }
 
+//0001
+//0011
+//1011
+//1001
+//
+//0001 and
+//1011 or
+//
+//1010 xor
+//
+//0101 xnor
+//
+//0001 tipoCar
 
 void verificarColunas(){
 	//printf("Colunas Verificadas\n");
@@ -76,6 +89,8 @@ void verificarColunas(){
 	int xnor;
 	int tipoCar;
 	for(int i=0;i<4;i++){
+		and = -1;
+		or = 0x0;
 		for(int j=0;j<4;j++){
 			and &= tabuleiro[i+j*4];
 			or |= tabuleiro[i+j*4];
@@ -91,8 +106,8 @@ void verificarColunas(){
 
 void verificarDiagoPri(){
 	//printf("Diagonal Principal Verificada\n");
-	int and;
-	int or;
+	int and = -1;
+	int or = 0x0;
 	int xor;
 	int xnor;
 	int tipoCar;
@@ -104,18 +119,18 @@ void verificarDiagoPri(){
 	xnor= ~xor;
 	tipoCar = xnor & and;
 	if(xnor>>4 && xor){
-		venceu(xnor, tipoCar, 2,1);
+		venceu(xnor, tipoCar, 2,0);
 	}
 }
 
 void verificarDiagoSec(){
 	//printf("Diagonal Secundaria Verificada\n");
-	int and;
-	int or;
+	int and = -1;
+	int or = 0x0;
 	int xor;
 	int xnor;
 	int tipoCar;
-	for(int i=0;i<4;i++){
+	for(int i=1;i<5;i++){
 		and &= tabuleiro[i*3];
 		or |= tabuleiro[i*3];
 	}
@@ -123,7 +138,7 @@ void verificarDiagoSec(){
 	xnor= ~xor;
 	tipoCar = xnor & and;
 	if(xnor>>4 && xor){
-		venceu(xnor, tipoCar, 2,2);
+		venceu(xnor, tipoCar, 2,1);
 	}
 }
 
@@ -148,7 +163,7 @@ void printarTabuleiro(){
 void venceu(int carac, int tipoCar, int tipo, int pos){
 	printarTabuleiro();
 	printf("%d\n",!(jogadas % 2) + 1);
-	//printarSequencia(tipo,pos);
+	printarSequencia(tipo,pos);
 	printarCarac(carac, tipoCar);
 	flag = 1;
 }
@@ -195,19 +210,27 @@ void printarCarac(int carac, int tipoCar){
 	}
 }
 
-//void printarSequencia(int tipo ,int pos){
-	
-//}
-//0001	0100
-//0011	1110
-//0001	0110
-//1001	1100
-//
-//0001	0100
-//1011	1110
-//
-//1010	1010
-//
-//0101	0101
-//0001	0100
+void printarSequencia(int tipo ,int pos){
+	switch(tipo){
+		case 0:
+			for(int i=0;i<4;i++){
+				printf("%X",i+pos*4);
+			}
+			printf("\n");
+			break;
+		case 1:
+			for(int i=0;i<4;i++){
+				printf("%X",pos+i*4);
+			}
+			printf("\n");
+			break;
+		case 2:
+			for(int i=pos;i<pos+4;i++){
+				printf("%X",i*(!pos*5)+i*(pos*3));
+			}
+			printf("\n");
+			break;
+	}
+}
+
 
