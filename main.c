@@ -170,7 +170,7 @@ void venceu(int carac, int tipoCar, int tipo, int pos){
 
 void printarCarac(int carac, int tipoCar){
 	int mask = 0b0001;
-	for(int i=0;i<4;i++){
+	for(int i=3;i>=0;i--){
 		int res = (mask<<i & carac)>>i;
 		int tipo = (mask<<i & tipoCar)>>i;
 		if(res){
@@ -178,32 +178,32 @@ void printarCarac(int carac, int tipoCar){
 				switch(i){
 					case 0:
 						printf("oca\n");
-						break;
+						return;
 					case 1:
 						printf("quadrada\n");
-						break;
+						return;
 					case 2:
 						printf("pequena\n");
-						break;
+						return;
 					case 3:
 						printf("escura\n");
-						break;
+						return;
 				}
 			}
 			else{
 				switch(i){
 					case 0:
 						printf("solida\n");
-						break;
+						return;
 					case 1:
 						printf("circular\n");
-						break;
+						return;
 					case 2:
 						printf("grande\n");
-						break;
+						return;
 					case 3:
 						printf("branca\n");
-						break;
+						return;
 				}
 			}
 		}
