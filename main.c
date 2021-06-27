@@ -18,6 +18,11 @@ int jogadas = 0;
 int main(int argc, char *argv[]){
 	inicializarTabuleiro();
 	while(flag){
+		if(jogadas > 15){
+			printarTabuleiro();
+			printf("0\n");
+			flag = 0;
+		}
 		int peca;
 		int posicao;
 		scanf("%X\n%X",&peca, &posicao);
