@@ -12,12 +12,12 @@ void printarCarac(int carac, int tipoCar);
 void printarSequencia(int tipo ,int pos);
 
 int tabuleiro[16];
-int flag = 0;
+int flag = 1;
 int jogadas = 0;
 
 int main(int argc, char *argv[]){
 	inicializarTabuleiro();
-	while(!flag){
+	while(flag){
 		int peca;
 		int posicao;
 		scanf("%X\n%X",&peca, &posicao);
@@ -61,7 +61,7 @@ void verificarLinhas(){
 		xor = and ^ or;
 		xnor = ~xor;
 		tipoCar = xnor & and;
-		if(xnor>>4 && xor ^ 0xf && and != or){
+		if(flag && xnor>>4 && xor ^ 0xf && and != or){
 			venceu(xnor, tipoCar, 0,i);
 		}
 	}
@@ -98,7 +98,7 @@ void verificarColunas(){
 		xor = and ^ or;
 		xnor= ~xor;
 		tipoCar = xnor & and;
-		if(xnor>>4 && xor ^ 0xf && and != or){
+		if(flag && xnor>>4 && xor ^ 0xf && and != or){
 			venceu(xnor, tipoCar, 1,i);
 		}
 	}
@@ -118,7 +118,7 @@ void verificarDiagoPri(){
 	xor = and ^ or;
 	xnor= ~xor;
 	tipoCar = xnor & and;
-	if(xnor>>4 && xor ^ 0xf && and != or){
+	if(flag && xnor>>4 && xor ^ 0xf && and != or){
 		venceu(xnor, tipoCar, 2,0);
 	}
 }
@@ -137,7 +137,7 @@ void verificarDiagoSec(){
 	xor = and ^ or;
 	xnor= ~xor;
 	tipoCar = xnor & and;
-	if(xnor>>4 && xor ^ 0xf && and != or){
+	if(flag && xnor>>4 && xor ^ 0xf && and != or){
 		venceu(xnor, tipoCar, 2,1);
 	}
 }
@@ -165,7 +165,7 @@ void venceu(int carac, int tipoCar, int tipo, int pos){
 	printf("%d\n",!(jogadas % 2) + 1);
 	printarSequencia(tipo,pos);
 	printarCarac(carac, tipoCar);
-	flag = 1;
+	flag = 0;
 }
 
 void printarCarac(int carac, int tipoCar){
