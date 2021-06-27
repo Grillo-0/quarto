@@ -61,25 +61,25 @@ void verificarLinhas(){
 		xor = and ^ or;
 		xnor = ~xor;
 		tipoCar = xnor & and;
-		if(xnor>>4 && xor){
+		if(xnor>>4 && xor ^ 0xf && and != or){
 			venceu(xnor, tipoCar, 0,i);
 		}
 	}
 }
 
-//0001
-//0011
-//1011
-//1001
+//11111111
+//11111111
+//11111111
+//11111111
 //
-//0001 and
-//1011 or
+//11111111 and
+//11111111 or
 //
-//1010 xor
+//00000000 xor
 //
-//0101 xnor
+//11111111 xnor
 //
-//0001 tipoCar
+//00000000 tipoCar
 
 void verificarColunas(){
 	//printf("Colunas Verificadas\n");
@@ -98,7 +98,7 @@ void verificarColunas(){
 		xor = and ^ or;
 		xnor= ~xor;
 		tipoCar = xnor & and;
-		if(xnor>>4 && xor){
+		if(xnor>>4 && xor ^ 0xf && and != or){
 			venceu(xnor, tipoCar, 1,i);
 		}
 	}
@@ -118,7 +118,7 @@ void verificarDiagoPri(){
 	xor = and ^ or;
 	xnor= ~xor;
 	tipoCar = xnor & and;
-	if(xnor>>4 && xor){
+	if(xnor>>4 && xor ^ 0xf && and != or){
 		venceu(xnor, tipoCar, 2,0);
 	}
 }
@@ -137,7 +137,7 @@ void verificarDiagoSec(){
 	xor = and ^ or;
 	xnor= ~xor;
 	tipoCar = xnor & and;
-	if(xnor>>4 && xor){
+	if(xnor>>4 && xor ^ 0xf && and != or){
 		venceu(xnor, tipoCar, 2,1);
 	}
 }
@@ -232,5 +232,3 @@ void printarSequencia(int tipo ,int pos){
 			break;
 	}
 }
-
-
