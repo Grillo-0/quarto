@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void inicializarTabuleiro();
-void verficaTabuleiro();
+void verificaTabuleiro();
 void verificarLinhas();
 void verificarColunas();
 void verificarDiagoPri();
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]){
 		scanf("%X\n%X",&peca, &posicao);
 
 		tabuleiro[posicao] = peca;
-		verficaTabuleiro();
+		verificaTabuleiro();
 		jogadas++;
 	}
 }
@@ -41,7 +41,7 @@ void inicializarTabuleiro(){
 
 }
 
-void verficaTabuleiro(){
+void verificaTabuleiro(){
 	verificarLinhas();
 	verificarColunas();
 	verificarDiagoPri();
