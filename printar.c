@@ -6,15 +6,15 @@
 extern jogo *quarto;
 
 void printarResultado(){
-    printarTabuleiro();
+    //printarTabuleiro();
     
     if(quarto->jogadas >= 16){
         printf("0\n"); //empate
         return;
     }else{
-        printarVencedor();
+        /*printarVencedor();
         printarSequencia();
-        printarCarac();
+        printarCarac();*/
     }
 }
 

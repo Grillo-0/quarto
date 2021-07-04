@@ -4,23 +4,29 @@
 #include "jogo.h"
 #include "verificar.h"
 #include "printar.h"
+#include "tui.h"
+
 
 jogo *quarto;
 
 int main(int argc, char *argv[]){
 	InicializarJogo();
+	InitializeScreen();
 
 	while (quarto->res.flag == 1 && quarto->jogadas < 16)
 	{
 		ColocarPeca();
-
-		verificarDiagonalS();
+		quarto->jogadas++;
+		/*verificarDiagonalS();
 		verificarDiagonalP();
 		verificarColunas();
-		verificarLinhas();
+		verificarLinhas();*/
+		UpdateScreen();
 	}
 	printarResultado();
 	free(quarto);
+
+	ClearScreen();
 }
 
 void InicializarTabuleiro(){
