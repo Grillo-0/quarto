@@ -14,10 +14,10 @@ int main(int argc, char *argv[]){
 	{
 		ColocarPeca();
 
-		verificarDiagonalS();
+		/*verificarDiagonalS();
 		verificarDiagonalP();
 		verificarColunas();
-		verificarLinhas();
+		verificarLinhas();*/
 	}
 	printarResultado();
 	free(quarto);
