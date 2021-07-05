@@ -23,12 +23,12 @@ void printarResultado(){
 void printarSequencia(){
     for (int i = 0; i < 4; i++)
     {
-        int linha = quarto->res.sequencia[i][0];
+        int linha = quarto->res.sequencia[i][0] * 4;
         int coluna = quarto->res.sequencia[i][1];
 
-        int peca = quarto->tabuleiro[linha][coluna];
+        int pos = linha + coluna;
 
-        printf("%X", peca);
+        printf("%X", pos);
     }
 }
 
