@@ -54,3 +54,27 @@ void verificarColunas(){
 		}
 	}
 }
+void verificarDiagonalP(){
+    int pecas[4];
+    int pos[4][2];
+    for (int i = 0; i < 4; i++){
+        pecas[i] = quarto->tabuleiro[i][i];
+        pos[i][0] = pos[i][1] = i;
+    }
+    if(verificar(pecas)){
+        memcpy(quarto->res.sequencia,pos,sizeof(pos));
+    }
+}
+
+void verificarDiagonalS(){
+    int pecas[4];
+    int pos[4][2];
+    for (int i = 0; i < 4; i++){
+        pecas[i] = quarto->tabuleiro[i][3-i];
+        pos[i][0] = i;
+        pos[i][1] = 3-i;
+    }
+    if(verificar(pecas)){
+        memcpy(quarto->res.sequencia,pos,sizeof(pos));
+    }
+}
