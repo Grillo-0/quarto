@@ -16,8 +16,8 @@ int verificar(int pecas[]){
 	int xnor = ~xor;
 	if(xnor>>4 && xor ^ 0xf && and != or){
 		quarto->res.flag = 0;
-		quarto->res.carac = xnor;
-		quarto->res.comum = xnor & and;
+		quarto->res.carac = xnor & and;
+		quarto->res.comum = xnor;
 		return 1;
 	}
 	return 0;

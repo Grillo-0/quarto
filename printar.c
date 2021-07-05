@@ -33,7 +33,7 @@ void printarSequencia(){
 }
 
 void printarVencedor(){
-	if (quarto->jogadas % 2 != 0){
+	if (quarto->jogadas % 2){
 	  printf("1");
 	}
 	else{
