@@ -7,7 +7,7 @@ extern jogo *quarto;
 
 void printarResultado(){
     printarTabuleiro();
-    if(quarto->jogadas >= 16){
+    if(quarto->jogadas >= 16 && quarto->res.flag){
         printf("0\n"); //empate
         return;
     }else{

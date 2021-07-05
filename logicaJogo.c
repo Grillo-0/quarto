@@ -10,7 +10,7 @@ jogo *quarto;
 int main(int argc, char *argv[]){
 	InicializarJogo();
 
-	while (quarto->res.flag == 1 && quarto->jogadas < 16)
+	while (quarto->res.flag && quarto->jogadas < 16)
 	{
 		ColocarPeca();
 
