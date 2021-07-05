@@ -29,3 +29,70 @@ void printarSequencia(){
         printf("%X", peca);
     }  
 }
+
+void printarVencedor(int jogadas){
+
+if (jogadas % 2 != 0){
+  printf("1");
+}
+else{
+  printf("2");
+}
+}
+
+void printarTabuleiro(){
+
+for (int i = 0; i < 4; i++){
+  for (int j = 0; j < 4; j++){  
+    if (quarto->tabuleiro[i][j] == -1){
+      printf("-");
+    }
+    else{
+      printf("%X", quarto->tabuleiro[i][j]);
+    }
+    printf("\n");
+  }
+}
+}
+
+void printarCarac(){
+	int mask = 0b0001;
+	for(int i=3;i>=0;i--){
+		int res = (mask<<i & quarto->res.comum)>>i;
+		int tipo = (mask<<i & quarto->res.carac)>>i;
+		if(res){
+			if(tipo){
+				switch(i){
+					case 0:
+						printf("oca\n");
+						return;
+					case 1:
+						printf("quadrada\n");
+						return;
+					case 2:
+						printf("pequena\n");
+						return;
+					case 3:
+						printf("escura\n");
+						return;
+				}
+			}
+			else{
+				switch(i){
+					case 0:
+						printf("solida\n");
+						return;
+					case 1:
+						printf("circular\n");
+						return;
+					case 2:
+						printf("grande\n");
+						return;
+					case 3:
+						printf("branca\n");
+						return;
+				}
+			}
+		}
+	}
+}
