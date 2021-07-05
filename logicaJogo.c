@@ -48,4 +48,5 @@ void ColocarPeca(){
 	int coluna = pos%4;
 
 	quarto->tabuleiro[linha][coluna] = peca;
+	quarto->jogadas++;
 }
