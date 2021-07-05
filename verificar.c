@@ -13,8 +13,8 @@ int verificar(int pecas[]){
 		or |= pecas[i];
 	}
 	int xor = and ^ or;
-	int xnor = ~or;
-	if(xor>>4 && xor ^ 0xf && and != or){
+	int xnor = ~xor;
+	if(xnor>>4 && xor ^ 0xf && and != or){
 		quarto->res.flag = 0;
 		quarto->res.carac = xnor;
 		quarto->res.comum = xnor & and;

@@ -7,14 +7,16 @@ extern jogo *quarto;
 
 void printarResultado(){
     printarTabuleiro();
-    
     if(quarto->jogadas >= 16){
         printf("0\n"); //empate
         return;
     }else{
         printarVencedor();
+		printf("\n");
         printarSequencia();
+		printf("\n");
         printarCarac();
+		printf("\n");
     }
 }
 
@@ -27,17 +29,16 @@ void printarSequencia(){
         int peca = quarto->tabuleiro[linha][coluna];
 
         printf("%X", peca);
-    }  
+    }
 }
 
-void printarVencedor(int jogadas){
-
-if (jogadas % 2 != 0){
-  printf("1");
-}
-else{
-  printf("2");
-}
+void printarVencedor(){
+	if (quarto->jogadas % 2 != 0){
+	  printf("1");
+	}
+	else{
+	  printf("2");
+	}
 }
 
 void printarTabuleiro(){
