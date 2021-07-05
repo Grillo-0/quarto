@@ -15,3 +15,6 @@ logicaJogo.o: logicaJogo.c
 
 clean:
 	rm *.o program
+
+zip:
+	zip quarto4.zip *.c Makefile
