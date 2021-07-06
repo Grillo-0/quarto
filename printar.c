@@ -3,23 +3,21 @@
 #include "jogo.h"
 #include "printar.h"
 
-extern jogo *quarto;
-
-void printarResultado(){
-    printarTabuleiro();
+void printarResultado(jogo *quarto){
+    printarTabuleiro(quarto);
     if(quarto->jogadas >= 16 && quarto->res.flag){
         printf("0\n"); //empate
         return;
     }else{
-        printarVencedor();
+        printarVencedor(quarto);
 		printf("\n");
-        printarSequencia();
+        printarSequencia(quarto);
 		printf("\n");
-        printarCarac();
+        printarCarac(quarto);
     }
 }
 
-void printarSequencia(){
+void printarSequencia(jogo *quarto){
     for (int i = 0; i < 4; i++)
     {
         int linha = quarto->res.sequencia[i][0] * 4;
@@ -31,7 +29,7 @@ void printarSequencia(){
     }
 }
 
-void printarVencedor(){
+void printarVencedor(jogo *quarto){
 	if (quarto->jogadas % 2){
 	  printf("2");
 	}
@@ -40,22 +38,21 @@ void printarVencedor(){
 	}
 }
 
-void printarTabuleiro(){
-
-for (int i = 0; i < 4; i++){
-  for (int j = 0; j < 4; j++){  
-    if (quarto->tabuleiro[i][j] == -1){
-      printf("-");
-    }
-    else{
-      printf("%X", quarto->tabuleiro[i][j]);
-    }
-  }
-  printf("\n");
+void printarTabuleiro(jogo *quarto){
+	for (int i = 0; i < 4; i++){
+	for (int j = 0; j < 4; j++){  
+		if (quarto->tabuleiro[i][j] == -1){
+		printf("-");
+		}
+		else{
+		printf("%X", quarto->tabuleiro[i][j]);
+		}
+	}
+	printf("\n");
+	}
 }
-}
 
-void printarCarac(){
+void printarCarac(jogo *quarto){
 	int mask = 0b0001;
 	for(int i=3;i>=0;i--){
 		int res = (mask<<i & quarto->res.comum)>>i;

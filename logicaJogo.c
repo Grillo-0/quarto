@@ -5,25 +5,24 @@
 #include "verificar.h"
 #include "printar.h"
 
-jogo *quarto;
-
 int main(int argc, char *argv[]){
-	InicializarJogo();
+	jogo *quarto;
+	quarto = InicializarJogo();
 
 	while (quarto->res.flag && quarto->jogadas < 16)
 	{
-		ColocarPeca();
+		ColocarPeca(quarto);
 
-		verificarDiagonalS();
-		verificarDiagonalP();
-		verificarColunas();
-		verificarLinhas();
+		verificarDiagonalS(quarto);
+		verificarDiagonalP(quarto);
+		verificarColunas(quarto);
+		verificarLinhas(quarto);
 	}
-	printarResultado();
+	printarResultado(quarto);
 	free(quarto);
 }
 
-void InicializarTabuleiro(){
+void InicializarTabuleiro(jogo *quarto){
 	for (int i = 0; i < 4; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -33,14 +32,15 @@ void InicializarTabuleiro(){
 	}
 }
 
-void InicializarJogo(){
-	quarto = malloc(sizeof(jogo) * 1);
-	InicializarTabuleiro();
-	quarto->jogadas = 0;
-	quarto->res.flag = 1;
+jogo *InicializarJogo(){
+	jogo *game = malloc(sizeof(jogo) * 1);
+	InicializarTabuleiro(game);
+	game->jogadas = 0;
+	game->res.flag = 1;
+	return game;
 }
 
-void ColocarPeca(){
+void ColocarPeca(jogo *quarto){
 	int peca, pos;
 	scanf("%X\n%X",&peca, &pos);
 

@@ -14,10 +14,10 @@ typedef struct{
     resultado res;
 }jogo;
 
-void InicializarJogo();
+jogo *InicializarJogo();
 
-void InicializarTabuleiro();
+void InicializarTabuleiro(jogo *quarto);
 
-void ColocarPeca();
+void ColocarPeca(jogo *quarto);
 
 #endif 

@@ -3,9 +3,7 @@
 
 #include "jogo.h"
 
-extern jogo *quarto;
-
-int verificar(int pecas[]){
+int verificar(jogo *quarto, int pecas[]){
 	int and=-1;
 	int or = 0;
 	for(int i=0; i<4; i++){
@@ -23,7 +21,7 @@ int verificar(int pecas[]){
 	return 0;
 }
 
-void verificarLinhas(){
+void verificarLinhas(jogo *quarto){
 	int pecas[4];
 	int pos[4][2];
 	for(int i=0; i<4; i++){
@@ -32,14 +30,14 @@ void verificarLinhas(){
 			pos[j][0] = i;
 			pos[j][1] = j;
 		}
-		if(verificar(pecas)){
+		if(verificar(quarto, pecas)){
 			memcpy(quarto->res.sequencia,pos,sizeof(pos));
 			break;
 		}
 	}
 }
 
-void verificarColunas(){
+void verificarColunas(jogo *quarto){
 	int pecas[4];
 	int pos[4][2];
 	for(int i=0; i<4; i++){
@@ -48,25 +46,25 @@ void verificarColunas(){
 			pos[j][0] = j;
 			pos[j][1] = i;
 		}
-		if(verificar(pecas)){
+		if(verificar(quarto, pecas)){
 			memcpy(quarto->res.sequencia,pos,sizeof(pos));
 			break;
 		}
 	}
 }
-void verificarDiagonalP(){
+void verificarDiagonalP(jogo *quarto){
     int pecas[4];
     int pos[4][2];
     for (int i = 0; i < 4; i++){
         pecas[i] = quarto->tabuleiro[i][i];
         pos[i][0] = pos[i][1] = i;
     }
-    if(verificar(pecas)){
+    if(verificar(quarto, pecas)){
         memcpy(quarto->res.sequencia,pos,sizeof(pos));
     }
 }
 
-void verificarDiagonalS(){
+void verificarDiagonalS(jogo *quarto){
     int pecas[4];
     int pos[4][2];
     for (int i = 0; i < 4; i++){
@@ -74,7 +72,7 @@ void verificarDiagonalS(){
         pos[i][0] = i;
         pos[i][1] = 3-i;
     }
-    if(verificar(pecas)){
+    if(verificar(quarto, pecas)){
         memcpy(quarto->res.sequencia,pos,sizeof(pos));
     }
 }
