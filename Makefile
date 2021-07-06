@@ -19,4 +19,4 @@ clean:
 	rm *.o program
 
 zip:
-	zip quarto4.zip *.c Makefile
+	zip quarto4.zip *.c *.h Makefile

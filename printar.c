@@ -16,7 +16,6 @@ void printarResultado(){
         printarSequencia();
 		printf("\n");
         printarCarac();
-		printf("\n");
     }
 }
 
