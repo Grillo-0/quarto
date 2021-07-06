@@ -1,4 +1,6 @@
-run: program
+all: program
+
+run:
 	./program
 
 program: verificar.o printar.o logicaJogo.o
